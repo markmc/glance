@@ -183,12 +183,7 @@ class TestApi(functional.FunctionalTest):
 
         image = json.loads(content)
 
-        for expected_key, expected_value in expected_image.items():
-            self.assertEqual(expected_value, image['images'][0][expected_key],
-                            "For key '%s' expected header value '%s'. Got '%s'"
-                            % (expected_key,
-                               expected_value,
-                               image['images'][0][expected_key]))
+        self.assertImageEqual(image['images'][0], expected_image)
 
         # 8. PUT /images/1 with custom properties of "distro" and "arch"
         # Verify 200 returned
@@ -224,12 +219,7 @@ class TestApi(functional.FunctionalTest):
 
         image = json.loads(content)
 
-        for expected_key, expected_value in expected_image.items():
-            self.assertEqual(expected_value, image['images'][0][expected_key],
-                            "For key '%s' expected header value '%s'. Got '%s'"
-                            % (expected_key,
-                               expected_value,
-                               image['images'][0][expected_key]))
+        self.assertImageEqual(image['images'][0], expected_image)
 
         # 10. PUT /images/1 and remove a previously existing property.
         headers = {'X-Image-Meta-Property-Arch': 'x86_64'}

@@ -467,3 +467,9 @@ class FunctionalTest(unittest.TestCase):
                             % (expected_key, expected_value,
                                response[expected_key]))
 
+    def assertImageEqual(self, image, expected):
+        for expected_key, expected_value in expected_image.items():
+            self.assertEqual(expected_value, image[expected_key],
+                            "For key '%s' expected image value '%s'. Got '%s'"
+                            % (expected_key, expected_value,
+                               image[expected_key]))
