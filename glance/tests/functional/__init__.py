@@ -459,3 +459,11 @@ class FunctionalTest(unittest.TestCase):
         engine = create_engine(self.registry_server.sql_connection,
                                pool_recycle=30)
         return engine.execute(sql)
+
+    def assertHeaders(self, response, expected_headers):
+        for expected_key, expected_value in expected_headers.items():
+            self.assertEqual(response[expected_key], expected_value,
+                            "For key '%s' expected header value '%s'. Got '%s'"
+                            % (expected_key, expected_value,
+                               response[expected_key]))
+

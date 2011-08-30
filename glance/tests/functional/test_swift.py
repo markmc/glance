@@ -224,18 +224,8 @@ class TestSwift(test_api.TestApi):
             'content-length': str(FIVE_MB),
             'content-type': 'application/octet-stream'}
 
-        for expected_key, expected_value in expected_image_headers.items():
-            self.assertEqual(response[expected_key], expected_value,
-                            "For key '%s' expected header value '%s'. Got '%s'"
-                            % (expected_key, expected_value,
-                               response[expected_key]))
-
-        for expected_key, expected_value in expected_std_headers.items():
-            self.assertEqual(response[expected_key], expected_value,
-                            "For key '%s' expected header value '%s'. Got '%s'"
-                            % (expected_key,
-                               expected_value,
-                               response[expected_key]))
+        self.assertHeaders(expected_image_headers)
+        self.assertHeaders(expected_std_headers)
 
         self.assertEqual(content, "*" * FIVE_MB)
         self.assertEqual(hashlib.md5(content).hexdigest(),
@@ -313,18 +303,8 @@ class TestSwift(test_api.TestApi):
             'content-length': str(FIVE_MB),
             'content-type': 'application/octet-stream'}
 
-        for expected_key, expected_value in expected_image_headers.items():
-            self.assertEqual(response[expected_key], expected_value,
-                            "For key '%s' expected header value '%s'. Got '%s'"
-                            % (expected_key, expected_value,
-                               response[expected_key]))
-
-        for expected_key, expected_value in expected_std_headers.items():
-            self.assertEqual(response[expected_key], expected_value,
-                            "For key '%s' expected header value '%s'. Got '%s'"
-                            % (expected_key,
-                               expected_value,
-                               response[expected_key]))
+        self.assertHeaders(expected_image_headers)
+        self.assertHeaders(expected_std_headers)
 
         self.assertEqual(content, "*" * FIVE_MB)
         self.assertEqual(hashlib.md5(content).hexdigest(),
