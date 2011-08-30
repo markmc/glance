@@ -103,6 +103,7 @@ class TestApi(functional.FunctionalTest):
                                          body=image_data)
         self.assertEqual(response.status, 201)
         data = json.loads(content)
+        self.assertEqual(data['image']['id'], 1)
         self.assertEqual(data['image']['checksum'],
                          hashlib.md5(image_data).hexdigest())
         self.assertEqual(data['image']['size'], FIVE_KB)
@@ -300,6 +301,7 @@ class TestApi(functional.FunctionalTest):
         response, content = http.request(path, 'POST', headers=headers)
         self.assertEqual(response.status, 201)
         data = json.loads(content)
+        self.assertEqual(data['image']['id'], 1)
         self.assertEqual(data['image']['checksum'], None)
         self.assertEqual(data['image']['size'], 0)
         self.assertEqual(data['image']['container_format'], None)
